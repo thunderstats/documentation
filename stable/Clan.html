@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Profile - Documentation</title>
+    <title>Clan - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Profile</h1>
+    <h1 class="page-title">Clan</h1>
     
 
     
@@ -40,10 +40,8 @@
 <header>
     
         <h2>
-        Profile
+        Clan
         </h2>
-        
-            <div class="class-description"><p>Parses the raw player data</p></div>
         
     
 </header>
@@ -54,10 +52,8 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
-    <h4 class="name" id="Profile"><span class="type-signature"></span>new Profile<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Clan"><span class="type-signature"></span>new Clan<span class="signature">(data)</span><span class="type-signature"></span></h4>
 
     
 
@@ -69,7 +65,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line2">line 2</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -109,7 +105,7 @@
 
 
 <div class="description">
-    <p>Creates a new Profile</p>
+    <p>Creates a new Squadron</p>
 </div>
 
 
@@ -153,7 +149,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#PlayerData">PlayerData</a></span>
+<span class="param-type"><a href="global.html#SquadronData">SquadronData</a></span>
 
 
             
@@ -163,7 +159,7 @@
 
             
 
-            <td class="description last"><p>The raw profile data</p></td>
+            <td class="description last"><p>The raw squadron data</p></td>
         </tr>
 
     
@@ -203,7 +199,7 @@
 
         
             
-<h4 class="name" id="countries"><span class="type-signature"></span>countries<span class="type-signature"> :Map.&lt;string, <a href="global.html#CountryInfo">CountryInfo</a>></span></h4>
+<h4 class="name" id="airkills"><span class="type-signature">(readonly) </span>airkills<span class="type-signature"> :Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span></h4>
 
 
 
@@ -214,7 +210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line50">line 50</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -254,7 +250,7 @@
 
 
 <div class="description">
-    <p>Per-country info for the player</p>
+    <p>The amount of air targets destroyed, mapped by gamemode</p>
 </div>
 
 
@@ -263,7 +259,372 @@
     <ul>
         <li>
             
-<span class="param-type">Map.&lt;string, <a href="global.html#CountryInfo">CountryInfo</a>></span>
+<span class="param-type">Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="createdAt"><span class="type-signature">(readonly) </span>createdAt<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The date of creation of the squadron</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="deaths"><span class="type-signature">(readonly) </span>deaths<span class="type-signature"> :Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The amount of deaths, mapped by gamemode</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="description"><span class="type-signature">(readonly) </span>description<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The squadron's description</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="flighttime"><span class="type-signature">(readonly) </span>flighttime<span class="type-signature"> :Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The total battle time, mapped by gamemode</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="groundkills"><span class="type-signature">(readonly) </span>groundkills<span class="type-signature"> :Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The amount of ground targets destroyed, mapped by gamemode</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Map.&lt;string, <a href="global.html#SquadronDifficultyStats">SquadronDifficultyStats</a>></span>
 
 
         </li>
@@ -287,7 +648,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line23">line 23</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -327,7 +688,7 @@
 
 
 <div class="description">
-    <p>The URL to the player's profile picture</p>
+    <p>The URL to the squadron's in-game picture</p>
 </div>
 
 
@@ -349,7 +710,7 @@
 
         
             
-<h4 class="name" id="level"><span class="type-signature">(readonly) </span>level<span class="type-signature"> :number</span></h4>
+<h4 class="name" id="members"><span class="type-signature"></span>members<span class="type-signature"></span></h4>
 
 
 
@@ -360,7 +721,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line37">line 37</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -400,20 +761,10 @@
 
 
 <div class="description">
-    <p>The experience level of the player</p>
+    <p>Get the amount of members, mapped by name</p>
 </div>
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -422,7 +773,7 @@
 
         
             
-<h4 class="name" id="nick"><span class="type-signature">(readonly) </span>nick<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="name"><span class="type-signature">(readonly) </span>name<span class="type-signature"> :string</span></h4>
 
 
 
@@ -433,7 +784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line30">line 30</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -473,7 +824,7 @@
 
 
 <div class="description">
-    <p>The in-game nickname of the player</p>
+    <p>The squadron name</p>
 </div>
 
 
@@ -495,7 +846,7 @@
 
         
             
-<h4 class="name" id="registered"><span class="type-signature">(readonly) </span>registered<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="players"><span class="type-signature">(readonly) </span>players<span class="type-signature"> :Number</span></h4>
 
 
 
@@ -506,7 +857,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line44">line 44</a>
+        <a href="structures_Clan.js.html">structures/Clan.js</a>, <a href="structures_Clan.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -546,7 +897,7 @@
 
 
 <div class="description">
-    <p>The registration data of the player</p>
+    <p>The amount of players in the squadron</p>
 </div>
 
 
@@ -555,229 +906,7 @@
     <ul>
         <li>
             
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="squadron"><span class="type-signature">(readonly, nullable) </span>squadron<span class="type-signature"> :string</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line65">line 65</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>The squadron name of the player, if he is in any.
-Returns null if the player is not in a squadron</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="stats"><span class="type-signature">(readonly) </span>stats<span class="type-signature"> :Map.&lt;string, <a href="global.html#ProfileStats">ProfileStats</a>></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line13">line 13</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>The player's statistics</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Map.&lt;string, <a href="global.html#ProfileStats">ProfileStats</a>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="title"><span class="type-signature">(readonly, nullable) </span>title<span class="type-signature"> :string</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Profile.js.html">structures/Profile.js</a>, <a href="structures_Profile.js.html#line74">line 74</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>The title of the player, if he has set any.
-Returns null if the player does not have
-a title set.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
+<span class="param-type">Number</span>
 
 
         </li>

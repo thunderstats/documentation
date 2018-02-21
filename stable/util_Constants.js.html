@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GETRequest.html">GETRequest</a><ul class='methods'><li data-type='method'><a href="GETRequest.html#gen">gen</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li><li><a href="RequestHandler.html">RequestHandler</a><ul class='methods'><li data-type='method'><a href="RequestHandler.html#get">get</a></li></ul></li><li><a href="Squadron.html">Squadron</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createError">createError</a></li><li><a href="global.html#message">message</a></li><li><a href="global.html#register">register</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createError">createError</a></li><li><a href="global.html#message">message</a></li><li><a href="global.html#register">register</a></li></ul>
 </nav>
 
 <div id="main">
@@ -37,27 +37,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const browser = exports.browser = typeof window !== "undefined";
+            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
+const browser = exports.browser = typeof window !== "undefined";
 
 exports.UserAgent = browser
   ? null
-  : `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3338.0 Safari/537.36`;
+  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${Package.version}`;
 
 /**
  * URLs to access specific endpoints. These are:
  * * https://warthunder.com/en
  * * https://warthunder.com/en/community/userinfo/
  * * https://warthunder.com/en/community/claninfo/
- * * https://warthunder.com/en/news/page/
- * * https://warthunder.com/en/game/changelog/page/
+ * * https://warthunder.com/news3-en.html/
  * @typedef {string} WTEndPointURL
  */
 exports.URLs = {
   main: "https://warthunder.com/en",
-  user: "https://warthunder.com/en/community/userinfo/?nick=",
+  user: "https://warthunder.com/en/community/userinfo/",
   clan: "https://warthunder.com/en/community/claninfo/",
-  news: "https://warthunder.com/en/news/page/",
-  changelog: "https://warthunder.com/en/game/changelog/page/"
+  news: "https://warthunder.com/news3-en.html"
 };
 
 /**
@@ -73,8 +72,7 @@ exports.EndPoints = keyMirror([
   "main",
   "user",
   "clan",
-  "news",
-  "changelog"
+  "news"
 ]);
 
 function keyMirror(arr) {
