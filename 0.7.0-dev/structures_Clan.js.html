@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -37,12 +37,13 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>class Clan {
-  /**
-   * Creates a new Squadron
-   * @param {SquadronData} data The raw squadron data
-   */
+            <pre class="prettyprint source linenums"><code>const { URLs } = require("../util/Constants");
+/**
+ * Represents a squadron/clan on War Thunder
+ */
+class Clan {
   constructor(data) {
+    this.data = data;
     /**
      * The squadron name
      * @type {string}
@@ -51,15 +52,8 @@
     this.name = data.name;
 
     /**
-     * The URL to the squadron's in-game picture
-     * @type {string}
-     * @readonly
-     */
-    this.image = data.image;
-
-    /**
      * The amount of players in the squadron
-     * @type {Number}
+     * @type {number}
      * @readonly
      */
     this.players = data.players;
@@ -71,17 +65,31 @@
      */
     this.description = data.description;
 
-    /**
-     * The date of creation of the squadron
-     * @type {string}
-     * @readonly
-     */
-    this.createdAt = data.createdAt;
+    this._patch(data);
+  }
 
+  /**
+   * The date of creation of the squadron
+   * @type {string}
+   * @readonly
+   */
+  get createdAt() {
+    return this.data.createdAt;
+  }
+
+  /**
+   * The URL to the squadron's in-game avatar
+   * @type {string}
+   * @readonly
+   */
+  get avatar() {
+    return `${URLs.static}${this.data.image}`;
+  }
+
+  _patch(data) {
     /**
      * The amount of air targets destroyed, mapped by gamemode
      * @type {Map&lt;string,SquadronDifficultyStats>}
-     * @readonly
      */
     this.airkills = new Map();
     this.airkills.set("arcade", data.airKills.arcade);
@@ -91,7 +99,6 @@
     /**
      * The amount of ground targets destroyed, mapped by gamemode
      * @type {Map&lt;string,SquadronDifficultyStats>}
-     * @readonly
      */
     this.groundkills = new Map();
     this.groundkills.set("arcade", data.groundKills.arcade);
@@ -101,7 +108,6 @@
     /**
      * The amount of deaths, mapped by gamemode
      * @type {Map&lt;string,SquadronDifficultyStats>}
-     * @readonly
      */
     this.deaths = new Map();
     this.deaths.set("arcade", data.deaths.arcade);
@@ -111,7 +117,6 @@
     /**
      * The total battle time, mapped by gamemode
      * @type {Map&lt;string,SquadronDifficultyStats>}
-     * @readonly
      */
     this.flighttime = new Map();
     this.flighttime.set("arcade", data.flightTime.arcade);
@@ -123,6 +128,7 @@
      * @return {Map&lt;string,SquadronMemberInfo>}
      */
     this.members = new Map();
+
     for (const member of data.members) this.members.set(member.name, member);
   }
 }
