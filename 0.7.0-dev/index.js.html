@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -111,26 +111,37 @@ class ThunderAPI {
       return Promise.resolve(profile);
     }
     const data = await this.rest.request("get", "user", player)
-      // eslint-disable-next-line arrow-body-style
-      .catch(error => {
-        return Promise.reject(error);
-      });
+      .catch(error => Promise.reject(error));
     const profile = new User(data);
     this.users.set(player, profile);
     return Promise.resolve(profile);
   }
 
   /**
+   * Searches on the War Thunder wiki
+   * @param {string} query The query to search on
+   * @return {Promise&lt;Wiki[]>}
+   */
+  async searchWiki(query) {
+    if (typeof query !== "string") return Promise.reject(new TypeError("INVALID_QUERY", query, "string"));
+    query = query.split(" ").join("+");
+    const data = await this.rest.request("get", "wiki", query)
+      .catch(error => Promise.reject(error));
+
+    return Promise.resolve(data);
+  }
+
+  /**
    * Verifies the given player's in-game nickname
    * @param {string} player The player to verify
-   * @return {Promise&lt;boolean>}
+   * @return {boolean}
    */
   isPlayer(player) {
-    if (typeof player !== "string") return Promise.reject(new TypeError("INVALID_QUERY", player, "string"));
-    if (this.users.has(player)) return Promise.resolve(true);
+    if (typeof player !== "string") throw new TypeError("INVALID_QUERY", player, "string");
+    if (this.users.has(player)) return true;
     return this.getPlayer(player)
-      .then(() => Promise.resolve(true))
-      .catch(() => Promise.resolve(false));
+      .then(() => true)
+      .catch(() => false);
   }
 
   /**
@@ -160,10 +171,7 @@ class ThunderAPI {
       return Promise.resolve(squadron);
     }
     const data = await this.rest.request("get", "clan", name)
-      // eslint-disable-next-line arrow-body-style
-      .catch(error => {
-        return Promise.reject(error);
-      });
+      .catch(error => Promise.reject(error));
     const squadron = new Clan(data);
     this.clans.set(name, squadron);
     return Promise.resolve(squadron);
@@ -176,10 +184,7 @@ class ThunderAPI {
   async getNews() {
     if (this.lastNews) return Promise.resolve(this.lastNews);
     const data = await this.rest.request("get", "news")
-      // eslint-disable-next-line arrow-body-style
-      .catch(error => {
-        return Promise.reject(error);
-      });
+      .catch(error => Promise.reject(error));
     this.lastNews = data;
     return Promise.resolve(data);
   }
