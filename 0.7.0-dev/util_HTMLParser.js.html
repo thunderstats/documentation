@@ -524,9 +524,9 @@ class HTMLParser {
         .trim(),
       /**
        * Represents info per difficulty for a clan.
-       * This is identical to Profile#difficultyInfo, with the difference being
-       * that Profile#difficultyInfo is for profile statistics (which are objects),
-       * and Squadron#SquadronDifficultyStats is for strings.
+       * This is identical to {@link Profile#difficultyInfo}, with the difference being
+       * that {@link Profile#difficultyInfo} is for profile statistics (which are objects),
+       * and {@link Clan#SquadronDifficultyStats} is for strings.
        * @typedef {Object} SquadronDifficultyStats
        * @property {string} arcade The info for the Arcade gamemode
        * @property {string} realistic The info for the Realistic gamemode
@@ -594,7 +594,7 @@ class HTMLParser {
     const data = [];
     const main = document.getElementsByClassName("mw-search-createlink")[0];
     if (main.textContent.trim() !== "") {
-      const arr = main.textContent
+      const arr = main.innerHTML
         .split("&lt;b>")
         .join("")
         .split("&lt;/b>")
