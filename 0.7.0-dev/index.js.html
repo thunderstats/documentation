@@ -63,14 +63,14 @@ class ThunderAPI {
     /**
      * A collection of cached profiles.
      * Cache will be sweeped after the time passed
-     * @type {Collection&lt;string, Profile>}
+     * @type {Collection&lt;string,Profile>}
      */
     this.users = new Collection();
 
     /**
      * A collection of cached profiles.
      * Cache will be sweeped after the time passed
-     * @type {Collection&lt;string, Profile>}
+     * @type {Collection&lt;string,Profile>}
      */
     this.clans = new Collection();
 
@@ -105,7 +105,7 @@ class ThunderAPI {
    *   .catch(err => console.error("Oh no, an error occurred!", err));
    */
   async getPlayer(player, getFromCache = true) {
-    if (typeof player !== "string") return Promise.reject(new TypeError("INVALID_QUERY", player, "string"));
+    if (typeof player !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "player", "string"));
     if (this.users.has(player) &amp;&amp; getFromCache) {
       const profile = this.users.get(player);
       return Promise.resolve(profile);
@@ -123,7 +123,7 @@ class ThunderAPI {
    * @return {Promise&lt;Wiki[]>}
    */
   async searchWiki(query) {
-    if (typeof query !== "string") return Promise.reject(new TypeError("INVALID_QUERY", query, "string"));
+    if (typeof query !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "query", "string"));
     query = query.split(" ").join("+");
     const data = await this.rest.request("get", "wiki", query)
       .catch(error => Promise.reject(error));
@@ -134,11 +134,11 @@ class ThunderAPI {
   /**
    * Verifies the given player's in-game nickname
    * @param {string} player The player to verify
-   * @return {boolean}
+   * @return {Promise&lt;boolean>}
    */
   isPlayer(player) {
-    if (typeof player !== "string") throw new TypeError("INVALID_QUERY", player, "string");
-    if (this.users.has(player)) return true;
+    if (typeof player !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "player", "string"));
+    if (this.users.has(player)) return Promise.resolve(true);
     return this.getPlayer(player)
       .then(() => true)
       .catch(() => false);
@@ -165,7 +165,7 @@ class ThunderAPI {
    *   .catch(err => console.error("Oh no, an error occurred!", err));
    */
   async getClan(name, getFromCache = true) {
-    if (typeof name !== "string") return Promise.reject(new TypeError("INVALID_QUERY", name, "string"));
+    if (typeof name !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "name", "string"));
     if (this.clans.has(name) &amp;&amp; getFromCache) {
       const squadron = this.clans.get(name);
       return Promise.resolve(squadron);
