@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -223,6 +223,152 @@
 
         
             
+<h4 class="name" id="_intervals"><span class="type-signature">(private) </span>_intervals<span class="type-signature"> :Set.&lt;Timeout></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line63">line 63</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Intervals set by <a href="ThunderAPI.html#setInterval"><code>ThunderAPI#setInterval</code></a> that are still active</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Set.&lt;Timeout></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="_timeouts"><span class="type-signature">(private) </span>_timeouts<span class="type-signature"> :Set.&lt;Timeout></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Timeouts set by <a href="ThunderAPI.html#setTimeout"><code>ThunderAPI#setTimeout</code></a> that are still active</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Set.&lt;Timeout></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="cacheSweepInterval"><span class="type-signature">(readonly) </span>cacheSweepInterval<span class="type-signature"> :number</span></h4>
 
 
@@ -296,7 +442,7 @@
 
         
             
-<h4 class="name" id="clans"><span class="type-signature"></span>clans<span class="type-signature"> :<a href="Collection.html">Collection</a>.&lt;string, Profile></span></h4>
+<h4 class="name" id="clans"><span class="type-signature"></span>clans<span class="type-signature"> :<a href="Collection.html">Collection</a>.&lt;string, <a href="Clan.html">Clan</a>></span></h4>
 
 
 
@@ -347,8 +493,8 @@
 
 
 <div class="description">
-    <p>A collection of cached profiles.
-Cache will be sweeped after the time passed</p>
+    <p>A collection of cached squadrons.
+The collection will be sweeped after the time passed</p>
 </div>
 
 
@@ -357,7 +503,80 @@ Cache will be sweeped after the time passed</p>
     <ul>
         <li>
             
-<span class="param-type"><a href="Collection.html">Collection</a>.&lt;string, Profile></span>
+<span class="param-type"><a href="Collection.html">Collection</a>.&lt;string, <a href="Clan.html">Clan</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="lastNews"><span class="type-signature">(nullable) </span>lastNews<span class="type-signature"> :Array.&lt;<a href="global.html#NewsInfo">NewsInfo</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The cached array of news items</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="global.html#NewsInfo">NewsInfo</a>></span>
 
 
         </li>
@@ -495,7 +714,7 @@ Cache will be sweeped after the time passed</p>
 
 <div class="description">
     <p>A collection of cached profiles.
-Cache will be sweeped after the time passed</p>
+The collection will be sweeped after the time passed</p>
 </div>
 
 
@@ -526,7 +745,7 @@ Cache will be sweeped after the time passed</p>
 
     
 
-    <h4 class="name" id="getClan"><span class="type-signature"></span>getClan<span class="signature">(name, getFromCache<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Clan.html">Clan</a>>}</span></h4>
+    <h4 class="name" id="clearInterval"><span class="type-signature"></span>clearInterval<span class="signature">(interval)</span><span class="type-signature"></span></h4>
 
     
 
@@ -538,7 +757,357 @@ Cache will be sweeped after the time passed</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line128">line 128</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line237">line 237</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Clears an interval.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>interval</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Timeout</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Interval to cancel</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="clearTimeout"><span class="type-signature"></span>clearTimeout<span class="signature">(timeout)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line215">line 215</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Clears a timeout.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Timeout</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Timeout to cancel</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="destroy"><span class="type-signature"></span>destroy<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line188">line 188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Destroys all assets used by ThunderAPI.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getClan"><span class="type-signature"></span>getClan<span class="signature">(name, cache<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Clan.html">Clan</a>>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line145">line 145</a>
     </li></ul></dd>
     
 
@@ -663,7 +1232,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
         <tr>
             
-                <td class="name"><code>getFromCache</code></td>
+                <td class="name"><code>cache</code></td>
             
 
             <td class="type">
@@ -740,7 +1309,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
     
 
-    <h4 class="name" id="getNews"><span class="type-signature"></span>getNews<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#NewsInfo">NewsInfo</a>>>}</span></h4>
+    <h4 class="name" id="getNews"><span class="type-signature"></span>getNews<span class="signature">(cache<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#NewsInfo">NewsInfo</a>>>}</span></h4>
 
     
 
@@ -752,7 +1321,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line145">line 145</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line163">line 163</a>
     </li></ul></dd>
     
 
@@ -805,6 +1374,75 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>If it should return the cached news object. Defaults to true</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
 
 
 
@@ -842,7 +1480,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
     
 
-    <h4 class="name" id="getPlayer"><span class="type-signature"></span>getPlayer<span class="signature">(player, getFromCache<span class="signature-attributes">opt</span>, shouldCache<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Profile>}</span></h4>
+    <h4 class="name" id="getPlayer"><span class="type-signature"></span>getPlayer<span class="signature">(player, cache<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Profile>}</span></h4>
 
     
 
@@ -854,7 +1492,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line68">line 68</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -976,7 +1614,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
         <tr>
             
-                <td class="name"><code>getFromCache</code></td>
+                <td class="name"><code>cache</code></td>
             
 
             <td class="type">
@@ -1009,45 +1647,6 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
             
 
             <td class="description last"><p>If it should get the player from the cache. Defaults to true</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>shouldCache</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>If it should cache the profile. Defaults to true</p></td>
         </tr>
 
     
@@ -1104,7 +1703,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line100">line 100</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -1255,7 +1854,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line86">line 86</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line103">line 103</a>
     </li></ul></dd>
     
 
@@ -1394,6 +1993,456 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
 
     
 
+    <h4 class="name" id="setInterval"><span class="type-signature"></span>setInterval<span class="signature">(fn, delay, &hellip;args)</span><span class="type-signature"> &rarr; {Timeout}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Sets an interval that will be automatically cancelled if the client is destroyed.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Function to execute</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Time to wait between executions (in milliseconds)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Arguments for the function</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Timeout</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setTimeout"><span class="type-signature"></span>setTimeout<span class="signature">(fn, delay, &hellip;args)</span><span class="type-signature"> &rarr; {Timeout}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line202">line 202</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Sets a timeout that will be automatically cancelled if the instance of ThunderAPI is destroyed.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Function to execute</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Time to wait before executing (in milliseconds)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Arguments for the function</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Timeout</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
     <h4 class="name" id="sweepCache"><span class="type-signature"></span>sweepCache<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
@@ -1406,7 +2455,7 @@ e.g. &quot;35th Gopnik nation battle group&quot; instead of
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line157">line 157</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line175">line 175</a>
     </li></ul></dd>
     
 

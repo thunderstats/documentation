@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -62,15 +62,15 @@ class ThunderAPI {
 
     /**
      * A collection of cached profiles.
-     * Cache will be sweeped after the time passed
+     * The collection will be sweeped after the time passed
      * @type {Collection&lt;string,Profile>}
      */
     this.users = new Collection();
 
     /**
-     * A collection of cached profiles.
-     * Cache will be sweeped after the time passed
-     * @type {Collection&lt;string,Profile>}
+     * A collection of cached squadrons.
+     * The collection will be sweeped after the time passed
+     * @type {Collection&lt;string,Clan>}
      */
     this.clans = new Collection();
 
@@ -81,17 +81,34 @@ class ThunderAPI {
      */
     this.cacheSweepInterval = cacheSweepInterval;
 
+    /**
+     * The cached array of news items
+     * @type {?Array&lt;NewsInfo>}
+     */
     this.lastNews = null;
 
+    /**
+     * Timeouts set by {@link ThunderAPI#setTimeout} that are still active
+     * @type {Set&lt;Timeout>}
+     * @private
+     */
+    this._timeouts = new Set();
+
+    /**
+     * Intervals set by {@link ThunderAPI#setInterval} that are still active
+     * @type {Set&lt;Timeout>}
+     * @private
+     */
+    this._intervals = new Set();
+
     // Sweep cache every 180 seconds/time specified in constructor
-    setInterval(this.sweepCache, this.cacheSweepInterval);
+    this.setInterval(this.sweepCache.bind(this), this.cacheSweepInterval);
   }
 
   /**
    * Get a player's profile
    * @param {string} player The profile of the player to fetch
-   * @param {boolean} [getFromCache=true] If it should get the player from the cache. Defaults to true
-   * @param {boolean} [shouldCache=true] If it should cache the profile. Defaults to true
+   * @param {boolean} [cache=true] If it should get the player from the cache. Defaults to true
    * @return {Promise&lt;Profile>}
    * @example
    * // The following example gets the profile of the player
@@ -104,9 +121,9 @@ class ThunderAPI {
    *   })
    *   .catch(err => console.error("Oh no, an error occurred!", err));
    */
-  async getPlayer(player, getFromCache = true) {
+  async getPlayer(player, cache = true) {
     if (typeof player !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "player", "string"));
-    if (this.users.has(player) &amp;&amp; getFromCache) {
+    if (this.users.has(player) &amp;&amp; cache) {
       const profile = this.users.get(player);
       return Promise.resolve(profile);
     }
@@ -150,7 +167,7 @@ class ThunderAPI {
    * e.g. "35th Gopnik nation battle group" instead of
    * "GOPNK".&lt;/note>
    * @param {string} name The **full** name of the squadron
-   * @param {boolean} [getFromCache=true] If it should get the squadron from the cache, if cached. Defaults to true
+   * @param {boolean} [cache=true] If it should get the squadron from the cache, if cached. Defaults to true
    * @return {Promise&lt;Clan>}
    * @example
    * // The following example gets info about
@@ -164,9 +181,9 @@ class ThunderAPI {
    *   })
    *   .catch(err => console.error("Oh no, an error occurred!", err));
    */
-  async getClan(name, getFromCache = true) {
+  async getClan(name, cache = true) {
     if (typeof name !== "string") return Promise.reject(new TypeError("INVALID_QUERY", "name", "string"));
-    if (this.clans.has(name) &amp;&amp; getFromCache) {
+    if (this.clans.has(name) &amp;&amp; cache) {
       const squadron = this.clans.get(name);
       return Promise.resolve(squadron);
     }
@@ -179,10 +196,11 @@ class ThunderAPI {
 
   /**
    * Returns an array of news objects
+   * @param {boolean} [cache=true] If it should return the cached news object. Defaults to true
    * @return {Promise&lt;NewsInfo[]>}
    */
-  async getNews() {
-    if (this.lastNews) return Promise.resolve(this.lastNews);
+  async getNews(cache) {
+    if (this.lastNews &amp;&amp; cache) return Promise.resolve(this.lastNews);
     const data = await this.rest.request("get", "news")
       .catch(error => Promise.reject(error));
     this.lastNews = data;
@@ -202,6 +220,62 @@ class ThunderAPI {
     } catch (err) {
       return false;
     }
+  }
+  /**
+   * Destroys all assets used by ThunderAPI.
+   */
+  destroy() {
+    for (const t of this._timeouts) clearTimeout(t);
+    for (const i of this._intervals) clearInterval(i);
+    this._timeouts.clear();
+    this._intervals.clear();
+  }
+
+  /**
+   * Sets a timeout that will be automatically cancelled if the instance of ThunderAPI is destroyed.
+   * @param {Function} fn Function to execute
+   * @param {number} delay Time to wait before executing (in milliseconds)
+   * @param {...*} args Arguments for the function
+   * @returns {Timeout}
+   */
+  setTimeout(fn, delay, ...args) {
+    const timeout = setTimeout(() => {
+      fn(...args);
+      this._timeouts.delete(timeout);
+    }, delay);
+    this._timeouts.add(timeout);
+    return timeout;
+  }
+
+  /**
+   * Clears a timeout.
+   * @param {Timeout} timeout Timeout to cancel
+   */
+  clearTimeout(timeout) {
+    clearTimeout(timeout);
+    this._timeouts.delete(timeout);
+  }
+
+  /**
+   * Sets an interval that will be automatically cancelled if the client is destroyed.
+   * @param {Function} fn Function to execute
+   * @param {number} delay Time to wait between executions (in milliseconds)
+   * @param {...*} args Arguments for the function
+   * @returns {Timeout}
+   */
+  setInterval(fn, delay, ...args) {
+    const interval = setInterval(fn, delay, ...args);
+    this._intervals.add(interval);
+    return interval;
+  }
+
+  /**
+   * Clears an interval.
+   * @param {Timeout} interval Interval to cancel
+   */
+  clearInterval(interval) {
+    clearInterval(interval);
+    this._intervals.delete(interval);
   }
 }
 
