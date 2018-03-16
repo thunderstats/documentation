@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util/Constants.js - Documentation</title>
+    <title>Collection - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,68 +27,106 @@
 
 <div id="main">
     
-    <h1 class="page-title">util/Constants.js</h1>
+    <h1 class="page-title">Collection</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
-const browser = exports.browser = typeof window !== "undefined";
+        <h2>
+        Collection
+        </h2>
+        
+    
+</header>
 
-exports.UserAgent = browser
-  ? null
-  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) ThunderAPI/${Package.version}`;
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * URLs to access specific endpoints. These are:
- * * https://warthunder.com/en
- * * https://warthunder.com/en/community/userinfo
- * * https://warthunder.com/en/community/claninfo
- * * https://warthunder.com/news3-en.html
- * * https://static.warthunder.com
- * * https://wiki.warthunder.com
- * @typedef {string} WTEndPointURL
- */
-exports.URLs = {
-  main: "https://warthunder.com/en",
-  user: "https://warthunder.com/en/community/userinfo",
-  clan: "https://warthunder.com/en/community/claninfo",
-  news: "https://warthunder.com/news3-en.html",
-  static: "https://static.warthunder.com",
-  wiki: "https://wiki.warthunder.com"
-};
+<dl class="details">
 
-/**
- * Endpoints to access the War Thunder site. These are:
- * * main
- * * user
- * * clan
- * * news
- * * static
- * * wiki
- * @typedef {string} WTEndPoint
- */
-exports.EndPoints = keyMirror([
-  "main",
-  "user",
-  "clan",
-  "news",
-  "static",
-  "wiki"
-]);
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_Collection.js.html">util/Collection.js</a>, <a href="util_Collection.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
 
-function keyMirror(arr) {
-  const tmp = Object.create(null);
-  for (const value of arr) tmp[value] = value;
-  return tmp;
-}</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://discord.js.org/#/docs/main/master/class/Collection">https://discord.js.org/#/docs/main/master/class/Collection</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

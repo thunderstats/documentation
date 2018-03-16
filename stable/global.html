@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createError">createError</a></li><li><a href="global.html#message">message</a></li><li><a href="global.html#register">register</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -108,495 +108,6 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="createError"><span class="type-signature"></span>createError<span class="signature">(Base)</span><span class="type-signature"> &rarr; {ThunderAPIError}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="errors_ThunderAPIError.js.html">errors/ThunderAPIError.js</a>, <a href="errors_ThunderAPIError.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Extend an error of some sort into a ThunderAPIError.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Base</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Error</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Base error to extend</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">ThunderAPIError</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="message"><span class="type-signature"></span>message<span class="signature">(key, args)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="errors_ThunderAPIError.js.html">errors/ThunderAPIError.js</a>, <a href="errors_ThunderAPIError.js.html#line33">line 33</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Format the message for an error.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>key</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Error key</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;*></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Arguments to pass for util format or as function args</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Formatted string</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(sym, val)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="errors_ThunderAPIError.js.html">errors/ThunderAPIError.js</a>, <a href="errors_ThunderAPIError.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Register an error code and message.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>sym</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Unique name for the error</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>val</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Value of the error</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Type Definitions</h3>
@@ -614,7 +125,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line349">line 349</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -752,7 +263,7 @@
 
 
 <div class="description">
-    <p>Provides info about a nation for a player's profile</p>
+    <p>Represents info about a nation for a player's profile</p>
 </div>
 
 
@@ -785,7 +296,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line64">line 64</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -923,7 +434,7 @@
 
 
 <div class="description">
-    <p>Provides info for all three gamemodes</p>
+    <p>Represents statistics per gamemode</p>
 </div>
 
 
@@ -956,7 +467,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line526">line 526</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line355">line 355</a>
     </li></ul></dd>
     
 
@@ -1094,7 +605,7 @@
 
 
 <div class="description">
-    <p>Provides info for news and changelogs</p>
+    <p>Represents a War Thunder news item</p>
 </div>
 
 
@@ -1127,7 +638,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line407">line 407</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line235">line 235</a>
     </li></ul></dd>
     
 
@@ -1242,7 +753,7 @@
 
 
 <div class="description">
-    <p>Provides raw data about a player</p>
+    <p>Represents raw data about a player</p>
 </div>
 
 
@@ -1275,7 +786,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line319">line 319</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -1727,7 +1238,7 @@
 
 
 <div class="description">
-    <p>Provides statistics about a user's profile</p>
+    <p>Represents the player's profile</p>
 </div>
 
 
@@ -1760,7 +1271,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line44">line 44</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line124">line 124</a>
     </li></ul></dd>
     
 
@@ -1938,7 +1449,7 @@
 
         <tr>
             
-                <td class="name"><code>fighter</code></td>
+                <td class="name"><code>lions</code></td>
             
 
             <td class="type">
@@ -1954,14 +1465,14 @@
 
             
 
-            <td class="description last"><p>The amount of time flown in a fighter</p></td>
+            <td class="description last"><p>The amount of Silver Lions earnt</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>bomber</code></td>
+                <td class="name"><code>playTime</code></td>
             
 
             <td class="type">
@@ -1977,20 +1488,20 @@
 
             
 
-            <td class="description last"><p>The amount of time flown in a bomber</p></td>
+            <td class="description last"><p>The time played</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>attacker</code></td>
+                <td class="name"><code>airTargets</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -2000,20 +1511,20 @@
 
             
 
-            <td class="description last"><p>The amount of time flown in an attacker</p></td>
+            <td class="description last"><p>The amount of air targets destroyed</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>tank</code></td>
+                <td class="name"><code>groundTargets</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -2023,20 +1534,20 @@
 
             
 
-            <td class="description last"><p>The amount of time driven in a tank</p></td>
+            <td class="description last"><p>The amount of ground targets destroyed</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>tankdestroyer</code></td>
+                <td class="name"><code>navalTargets</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -2046,122 +1557,7 @@
 
             
 
-            <td class="description last"><p>The amount of time driven in a tank destroyer</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>heavytank</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The amount of time driven in a heavy tank</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>spaa</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The amount of time driven in a SPAA</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>airkills</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The total amount of air targets destroyed</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>groundkills</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The total amount of ground targets destroyed</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>battletime</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The total amount of time played</p></td>
+            <td class="description last"><p>The amount of naval targets destroyed</p></td>
         </tr>
 
     
@@ -2174,7 +1570,7 @@
 
 
 <div class="description">
-    <p>Provides game statistics about a player</p>
+    <p>Represents player statistics</p>
 </div>
 
 
@@ -2207,7 +1603,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line457">line 457</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line285">line 285</a>
     </li></ul></dd>
     
 
@@ -2322,7 +1718,7 @@
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">number</span>
 
 
             
@@ -2506,7 +1902,7 @@
 
 
 <div class="description">
-    <p>Provides raw Squadron Data</p>
+    <p>Represents raw clan data</p>
 </div>
 
 
@@ -2539,7 +1935,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line482">line 482</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line311">line 311</a>
     </li></ul></dd>
     
 
@@ -2677,10 +2073,10 @@
 
 
 <div class="description">
-    <p>Provides info per difficulty for a squadron.
-This is identical to Profile#difficultyInfo, with the difference being
-that Profile#difficultyInfo is for profile statistics (which are objects),
-and Squadron#SquadronDifficultyStats is for strings.</p>
+    <p>Represents info per difficulty for a clan.
+This is identical to <code>Profile#difficultyInfo</code>, with the difference being
+that <code>Profile#difficultyInfo</code> is for profile statistics (which are objects),
+and <code>Clan#SquadronDifficultyStats</code> is for strings.</p>
 </div>
 
 
@@ -2713,7 +2109,7 @@ and Squadron#SquadronDifficultyStats is for strings.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line436">line 436</a>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line264">line 264</a>
     </li></ul></dd>
     
 
@@ -2874,7 +2270,178 @@ and Squadron#SquadronDifficultyStats is for strings.</p>
 
 
 <div class="description">
-    <p>Provides info about Squadron members</p>
+    <p>Represents info about a clan member</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="wiki">wiki</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_HTMLParser.js.html">util/HTMLParser.js</a>, <a href="util_HTMLParser.js.html#line399">line 399</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The title of the search result's page</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The URL to the search result's page</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>main</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>If there is a page named as the search query on the Wiki</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>Represents a War Thunder Wiki search result</p>
 </div>
 
 
@@ -2907,7 +2474,7 @@ and Squadron#SquadronDifficultyStats is for strings.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_Constants.js.html">util/Constants.js</a>, <a href="util_Constants.js.html#line23">line 23</a>
+        <a href="util_Constants.js.html">util/Constants.js</a>, <a href="util_Constants.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -2953,7 +2520,8 @@ and Squadron#SquadronDifficultyStats is for strings.</p>
 <li>user</li>
 <li>clan</li>
 <li>news</li>
-<li>changelog</li>
+<li>static</li>
+<li>wiki</li>
 </ul>
 </div>
 
@@ -3030,9 +2598,11 @@ and Squadron#SquadronDifficultyStats is for strings.</p>
     <p>URLs to access specific endpoints. These are:</p>
 <ul>
 <li>https://warthunder.com/en</li>
-<li>https://warthunder.com/en/community/userinfo/</li>
-<li>https://warthunder.com/en/community/claninfo/</li>
-<li>https://warthunder.com/news3-en.html/</li>
+<li>https://warthunder.com/en/community/userinfo</li>
+<li>https://warthunder.com/en/community/claninfo</li>
+<li>https://warthunder.com/news3-en.html</li>
+<li>https://static.warthunder.com</li>
+<li>https://wiki.warthunder.com</li>
 </ul>
 </div>
 

@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createError">createError</a></li><li><a href="global.html#message">message</a></li><li><a href="global.html#register">register</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -37,30 +37,14 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** Parses the raw player data */
-class Profile {
-  /**
-   * Creates a new Profile
-   * @param {PlayerData} data The raw profile data
-   */
+            <pre class="prettyprint source linenums"><code>const { URLs } = require("../util/Constants");
+
+/**
+ * Represents a player on War Thunder
+ */
+class User {
   constructor(data) {
-    /**
-     * The player's statistics
-     * @type {Map&lt;string, ProfileStats>}
-     * @readonly
-     */
-    this.stats = new Map();
-    this.stats.set("arcade", data.stats.arcade);
-    this.stats.set("realistic", data.stats.realistic);
-    this.stats.set("simulator", data.stats.simulator);
-
-    /**
-     * The URL to the player's profile picture
-     * @type {string}
-     * @readonly
-     */
-    this.image = data.profile.image;
-
+    this.data = data;
     /**
      * The in-game nickname of the player
      * @type {string}
@@ -76,12 +60,60 @@ class Profile {
     this.level = data.profile.level;
 
     /**
-     * The registration data of the player
-     * @type {string}
+     * The squadron name of the player, if he is in any
+     * @type {?string}
      * @readonly
      */
-    this.registered = data.profile.registered;
+    this.squadron = data.profile.squadron || null;
 
+    /**
+     * The title of the player, if he has set any
+     * @type {?string}
+     * @readonly
+     */
+    this.title = data.profile.title || null;
+
+    this._patch(data);
+  }
+
+  /**
+   * The date the player has been registered
+   * @type {string}
+   * @readonly
+   */
+  get createdAt() {
+    return this.data.profile.registered;
+  }
+
+  /**
+   * The URL to the player's profile picture
+   * @type {?string}
+   * @readonly
+   */
+  get image() {
+    return this.data.profile.image ? `${URLs.static}/${this.data.profile.image}` : null;
+  }
+
+  toJSON() {
+    const obj = {
+      nick: this.nick,
+      level: this.level,
+      squadron: this.squadron,
+      title: this.title,
+      createdAt: this.createdAt,
+      image: this.image
+    };
+    const countries = [];
+    const stats = [];
+    for (const country of [...this.countries.values()]) countries.push(country);
+    for (const stat of [...this.stats.values()]) stats.push(stat);
+    obj.countries = countries;
+    obj.stats = stats;
+
+    return obj;
+  }
+
+  _patch(data) {
     /**
      * Per-country info for the player
      * @type {Map&lt;string,CountryInfo>}
@@ -96,25 +128,14 @@ class Profile {
     this.countries.set("france", data.profile.france);
 
     /**
-     * The squadron name of the player, if he is in any.
-     * Returns null if the player is not in a squadron
-     * @type {?string}
-     * @readonly
+     * The player's statistics
+     * @type {Map&lt;string,ProfileStats>}
      */
-    this.squadron = data.profile.squadron || null;
-
-    /**
-     * The title of the player, if he has set any.
-     * Returns null if the player does not have
-     * a title set.
-     * @type {?string}
-     * @readonly
-     */
-    this.title = data.profile.title || null;
+    this.stats = new Map(Object.entries(data.stats));
   }
 }
 
-module.exports = Profile;</code></pre>
+module.exports = User;</code></pre>
         </article>
     </section>
 

@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="Profile.html">Profile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createError">createError</a></li><li><a href="global.html#message">message</a></li><li><a href="global.html#register">register</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <div id="main">
@@ -86,8 +86,8 @@
 </ul>
 <h2>Install</h2><p><strong>Node.js v8 or higher is required.</strong></p>
 <pre class="prettyprint source lang-bash"><code>npm install thunderapi</code></pre><p>To install the <strong>development</strong> branch (please note that this may not be stable):</p>
-<pre class="prettyprint source lang-bash"><code>npm install thunderstats/thunderapi</code></pre><p>Documentation for the <strong>master</strong> branch can be found <a href="https://thunderstats.github.io/documentation/master">here</a>.</p>
-<h2>Example usage</h2><pre class="prettyprint source lang-js"><code>const { ThunderAPI } = require(&quot;thunderapi&quot;);
+<pre class="prettyprint source lang-bash"><code>npm install thunderstats/thunderapi</code></pre><p>Documentation for the <strong>master</strong> branch can be found <a href="https://thunderstats.github.io/documentation/0.7.0-dev">here</a>.</p>
+<h2>Example usage</h2><pre class="prettyprint source lang-js"><code>const ThunderAPI = require(&quot;thunderapi&quot;);
 // Create a new instance of ThunderAPI
 const thunderAPI = new ThunderAPI();
 
@@ -97,10 +97,10 @@ const thunderAPI = new ThunderAPI();
 thunderAPI.getPlayer(&quot;Abinavski&quot;)
   // We handle the data returned here, in this case
   // by logging the title the player has set.
-  .then(data => console.log(&quot;Title:&quot;, data.title))
+  .then(user => console.log(&quot;Title:&quot;, data.title))
   // If an error occurred, we catch it here!
   .catch(err => console.error(&quot;Oh no, an error occurred!\n&quot;, err));</code></pre><h2>Documentation</h2><p><a href="https://thunderstats.github.io/documentation/stable">View the documentation here.</a></p>
-<h2>Contributing</h2><p>If you wish to contribute to ThunderAPI, you are free to do so! Before getting started, please read the <a href="https://github.com/devdutchy/thunderapi/blob/master/.github/CONTRIBUTING.md">contribution guidelines</a> first.</p>
+<h2>Contributing</h2><p>If you wish to contribute to ThunderAPI, you are free to do so! Before getting started, please read the <a href="https://github.com/thunderstats/thunderapi/blob/master/.github/CONTRIBUTING.md">contribution guidelines</a> first.</p>
 <h2>Support</h2><p>If you encounter any problems using the ThunderAPI, want to leave a feature suggestion or just want a gentle nudge in the right direction, feel free to join our official <a href="https://discord.gg/eTPh44S">Discord server!</a></p>
 <p><a href="https://discord.gg/eTPh44S"><img src="https://discordapp.com/api/guilds/412214318369865728/embed.png?style=banner2" alt="Discord"></a></p></article>
     </section>
