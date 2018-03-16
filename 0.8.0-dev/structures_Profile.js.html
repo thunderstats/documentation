@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>structures/Profile.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clan.html">Clan</a></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#getClan">getClan</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#getPlayer">getPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">structures/Profile.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { URLs } = require("../util/Constants");
+
+/**
+ * Represents a player on War Thunder
+ */
+class User {
+  constructor(data) {
+    this.data = data;
+    /**
+     * The in-game nickname of the player
+     * @type {string}
+     * @readonly
+     */
+    this.nick = data.profile.nick;
+
+    /**
+     * The experience level of the player
+     * @type {number}
+     * @readonly
+     */
+    this.level = data.profile.level;
+
+    /**
+     * The squadron name of the player, if he is in any
+     * @type {?string}
+     * @readonly
+     */
+    this.squadron = data.profile.squadron || null;
+
+    /**
+     * The title of the player, if he has set any
+     * @type {?string}
+     * @readonly
+     */
+    this.title = data.profile.title || null;
+
+    this._patch(data);
+  }
+
+  /**
+   * The date the player has been registered
+   * @type {string}
+   * @readonly
+   */
+  get createdAt() {
+    return this.data.profile.registered;
+  }
+
+  /**
+   * The URL to the player's profile picture
+   * @type {?string}
+   * @readonly
+   */
+  get image() {
+    return this.data.profile.image ? `${URLs.static}/${this.data.profile.image}` : null;
+  }
+
+  toJSON() {
+    const obj = {
+      nick: this.nick,
+      level: this.level,
+      squadron: this.squadron,
+      title: this.title,
+      createdAt: this.createdAt,
+      image: this.image
+    };
+    const countries = [];
+    const stats = [];
+    for (const country of [...this.countries.values()]) countries.push(country);
+    for (const stat of [...this.stats.values()]) stats.push(stat);
+    obj.countries = countries;
+    obj.stats = stats;
+
+    return obj;
+  }
+
+  _patch(data) {
+    /**
+     * Per-country info for the player
+     * @type {Map&lt;string,CountryInfo>}
+     */
+    this.countries = new Map();
+    this.countries.set("usa", data.profile.usa);
+    this.countries.set("ussr", data.profile.ussr);
+    this.countries.set("britain", data.profile.britain);
+    this.countries.set("germany", data.profile.germany);
+    this.countries.set("japan", data.profile.japan);
+    this.countries.set("italy", data.profile.italy);
+    this.countries.set("france", data.profile.france);
+
+    /**
+     * The player's statistics
+     * @type {Map&lt;string,ProfileStats>}
+     */
+    this.stats = new Map(Object.entries(data.stats));
+  }
+}
+
+module.exports = User;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
