@@ -108,13 +108,18 @@ class HTMLParser {
       image: document.getElementsByClassName("user-profile__ava-img")[0].src.split("/").slice(3).join("/"),
       nick: userinfo.children[0].innerHTML.trim(),
       title: userinfo.children[1].innerHTML.trim(),
-      squadron: userinfo.children[2].children[0].innerHTML.trim(),
-      level: userinfo.children[3].innerHTML
+      squadron: userinfo.children[2].children[0] ? userinfo.children[2].children[0].innerHTML.trim() : null,
+      level: !userinfo.children[2].children[0] ? userinfo.children[2].innerHTML
         .trim()
         .split(" ")
         .slice(1)
-        .join(""),
-      registered: userinfo.children[4].innerHTML.trim().split(" ")[2],
+        .join("")
+        : userinfo.children[3].innerHTML.trim().split(" ")
+          .slice(1)
+          .join(""),
+      registered: !userinfo.children[2].children[0]
+        ? userinfo.children[3].innerHTML.trim().split(" ")[2]
+        : userinfo.children[4].innerHTML.trim().split(" ")[2],
       /**
        * Represents info about a nation for a player's profile
        * @typedef {Object} CountryInfo
@@ -170,9 +175,9 @@ class HTMLParser {
      * @property {string} deaths The amount of deaths
      * @property {string} lions The amount of Silver Lions earnt
      * @property {string} playTime The time played
-     * @property {number} airTargets The amount of air targets destroyed
-     * @property {number} groundTargets The amount of ground targets destroyed
-     * @property {number} navalTargets The amount of naval targets destroyed
+     * @property {string} airTargets The amount of air targets destroyed
+     * @property {string} groundTargets The amount of ground targets destroyed
+     * @property {string} navalTargets The amount of naval targets destroyed
      */
     const stats = {
       /**
@@ -183,90 +188,90 @@ class HTMLParser {
        * @property {ProfileStats} simulator The info for the Simulator gamemode
        */
       arcade: {
-        victories: !statscard.children[1].children[1].children.length
-          ? parseInt(statscard.children[1].children[1].innerHTML.trim())
+        victories: !statscard.children[1].children[1].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[1].innerHTML.trim()
           : statscard.children[1].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[1].children[2].children.length
-          ? parseInt(statscard.children[1].children[2].innerHTML.trim())
+        completed: !statscard.children[1].children[2].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[2].innerHTML.trim()
           : statscard.children[1].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[1].children[3].children.length
+        ratio: !statscard.children[1].children[3].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[1].children[3].innerHTML.trim()
           : statscard.children[1].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[1].children[4].children.length
-          ? parseInt(statscard.children[1].children[4].innerHTML.trim())
+        deaths: !statscard.children[1].children[4].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[4].innerHTML.trim()
           : statscard.children[1].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[1].children[5].children.length
+        lions: !statscard.children[1].children[5].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[1].children[5].innerHTML.trim()
           : statscard.children[1].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[1].children[6].children.length
+        playTime: !statscard.children[1].children[6].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[1].children[6].innerHTML.trim()
           : statscard.children[1].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[1].children[7].children.length
-          ? parseInt(statscard.children[1].children[7].innerHTML.trim())
+        airTargets: !statscard.children[1].children[7].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[7].innerHTML.trim()
           : statscard.children[1].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[1].children[8].children.length
-          ? parseInt(statscard.children[1].children[8].innerHTML.trim())
-          : statscard.children[1].children[8].children[9].innerHTML.trim(),
-        navalTargets: !statscard.children[1].children[1].children.length
-          ? parseInt(statscard.children[1].children[9].innerHTML.trim())
+        groundTargets: !statscard.children[1].children[8].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[8].innerHTML.trim()
+          : statscard.children[1].children[8].children[0].innerHTML.trim(),
+        navalTargets: !statscard.children[1].children[9].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[1].children[9].innerHTML.trim()
           : statscard.children[1].children[9].children[0].innerHTML.trim()
       },
       realistic: {
-        victories: !statscard.children[2].children[1].children.length
-          ? parseInt(statscard.children[2].children[1].innerHTML.trim())
+        victories: !statscard.children[2].children[1].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[1].innerHTML.trim()
           : statscard.children[2].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[2].children[2].children.length
-          ? parseInt(statscard.children[2].children[2].innerHTML.trim())
+        completed: !statscard.children[2].children[2].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[2].innerHTML.trim()
           : statscard.children[2].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[2].children[3].children.length
+        ratio: !statscard.children[2].children[3].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[2].children[3].innerHTML.trim()
           : statscard.children[2].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[2].children[4].children.length
-          ? parseInt(statscard.children[2].children[4].innerHTML.trim())
+        deaths: !statscard.children[2].children[4].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[4].innerHTML.trim()
           : statscard.children[2].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[2].children[5].children.length
+        lions: !statscard.children[2].children[5].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[2].children[5].innerHTML.trim()
           : statscard.children[2].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[2].children[6].children.length
+        playTime: !statscard.children[2].children[6].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[2].children[6].innerHTML.trim()
           : statscard.children[2].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[2].children[7].children.length
-          ? parseInt(statscard.children[2].children[7].innerHTML.trim())
+        airTargets: !statscard.children[2].children[7].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[7].innerHTML.trim()
           : statscard.children[2].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[2].children[1].children.length
-          ? parseInt(statscard.children[2].children[8].innerHTML.trim())
+        groundTargets: !statscard.children[2].children[8].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[8].innerHTML.trim()
           : statscard.children[2].children[8].children[0].innerHTML.trim(),
-        navalTargets: !statscard.children[2].children[9].children.length
-          ? parseInt(statscard.children[2].children[9].innerHTML.trim())
+        navalTargets: !statscard.children[2].children[9].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[2].children[9].innerHTML.trim()
           : statscard.children[2].children[9].children[0].innerHTML.trim()
       },
       simulator: {
-        victories: !statscard.children[3].children[1].children.length
-          ? parseInt(statscard.children[3].children[1].innerHTML.trim())
+        victories: !statscard.children[3].children[1].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[1].innerHTML.trim()
           : statscard.children[3].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[3].children[2].children.length
-          ? parseInt(statscard.children[3].children[2].innerHTML.trim())
+        completed: !statscard.children[3].children[2].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[2].innerHTML.trim()
           : statscard.children[3].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[3].children[3].children.length
+        ratio: !statscard.children[3].children[3].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[3].children[3].innerHTML.trim()
           : statscard.children[3].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[3].children[4].children.length
-          ? parseInt(statscard.children[3].children[4].innerHTML.trim())
+        deaths: !statscard.children[3].children[4].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[4].innerHTML.trim()
           : statscard.children[3].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[3].children[5].children.length
+        lions: !statscard.children[3].children[5].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[3].children[5].innerHTML.trim()
           : statscard.children[3].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[3].children[6].children.length
+        playTime: !statscard.children[3].children[6].innerHTML.toLowerCase().includes("n/a")
           ? statscard.children[3].children[6].innerHTML.trim()
           : statscard.children[3].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[3].children[7].children.length
-          ? parseInt(statscard.children[3].children[7].innerHTML.trim())
+        airTargets: !statscard.children[3].children[7].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[7].innerHTML.trim()
           : statscard.children[3].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[3].children[1].children.length
-          ? parseInt(statscard.children[3].children[8].innerHTML.trim())
+        groundTargets: !statscard.children[3].children[8].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[8].innerHTML.trim()
           : statscard.children[3].children[8].children[0].innerHTML.trim(),
-        navalTargets: !statscard.children[3].children[9].children.length
-          ? parseInt(statscard.children[3].children[9].innerHTML.trim())
+        navalTargets: !statscard.children[3].children[9].innerHTML.toLowerCase().includes("n/a")
+          ? statscard.children[3].children[9].innerHTML.trim()
           : statscard.children[3].children[9].children[0].innerHTML.trim()
       }
     };
