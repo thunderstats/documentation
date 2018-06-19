@@ -43,14 +43,15 @@
  * Represents a player on War Thunder
  */
 class User {
-  constructor(data) {
+  constructor(data, thunderAPI) {
+    this.thunderAPI = thunderAPI;
     this.data = data;
     /**
      * The in-game nickname of the player
      * @type {string}
      * @readonly
      */
-    this.nick = data.profile.nick;
+    this.name = data.profile.name;
 
     /**
      * The experience level of the player
@@ -58,13 +59,6 @@ class User {
      * @readonly
      */
     this.level = data.profile.level;
-
-    /**
-     * The squadron name of the player, if he is in any
-     * @type {?string}
-     * @readonly
-     */
-    this.squadron = data.profile.squadron || null;
 
     /**
      * The title of the player, if he has set any
@@ -77,11 +71,24 @@ class User {
   }
 
   /**
+   * The squadron name of the player, if he is in any
+   * @type {Promise&lt;?Clan>}
+   * @readonly
+   */
+  get clan() {
+    /* const name = decodeURIComponent(this.data.profile.clan.url.replace("https://warthunder.com/en/community/claninfo/", ""));
+    return this.thunderAPI.getClan(name)
+      .then(data => data)
+      .catch(() => null); */
+    return this.data.clan;
+  }
+
+  /**
    * The date the player has been registered
    * @type {string}
    * @readonly
    */
-  get createdAt() {
+  get registered() {
     return this.data.profile.registered;
   }
 
@@ -91,17 +98,17 @@ class User {
    * @readonly
    */
   get image() {
-    return this.data.profile.image ? `${URLs.static}/${this.data.profile.image}` : null;
+    return this.data.profile.avatar || null;
   }
 
   toJSON() {
     const obj = {
-      nick: this.nick,
+      name: this.name,
       level: this.level,
-      squadron: this.squadron,
+      clan: this.clan,
       title: this.title,
-      createdAt: this.createdAt,
-      image: this.image
+      registered: this.registered,
+      avatar: this.avatar
     };
     const countries = [];
     const stats = [];

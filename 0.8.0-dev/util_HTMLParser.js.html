@@ -40,6 +40,7 @@
             <pre class="prettyprint source linenums"><code>const { JSDOM } = require("jsdom");
 const { TypeError, Error } = require("../errors");
 const { URLs, EndPoints } = require("./Constants");
+const cheerio = require("cheerio");
 
 /**
  * Parses raw HTML to readable objects
@@ -77,25 +78,24 @@ class HTMLParser {
     throw new TypeError("INVALID_TYPE");
   }
   parseUser() { // eslint-disable-line complexity
-    const { window: { document } } = new JSDOM(this.html);
+    const $ = cheerio.load(this.html);
 
-    const userinfo = document.getElementsByClassName("user-profile__data-list")[0];
-    const score = document.getElementsByClassName("profile-score__list-col"),
-      vehicles = score[0],
-      elite = score[1],
-      medals = score[2];
+    if (!$(".user-profile__data-nick").length) throw new TypeError("USER_UNAVAILABLE");
 
-    if (!userinfo) throw new TypeError("USER_UNAVAILABLE");
-
+    const info = $(".user-profile__data-item");
+    const planes = $(".profile-score__list-col:nth-child(2) > .profile-score__list-item:not(:first-child)");
+    const elite = $(".profile-score__list-col:nth-child(3) > .profile-score__list-item:not(:first-child)");
+    const medals = $(".profile-score__list-col:nth-child(4) > .profile-score__list-item:not(:first-child)");
     /**
      * Represents the player's profile
      * @typedef {Object} ProfileInfo
-     * @property {string} image The URL to the player's in-game avatar
-     * @property {string} nick The player's in-game name
+     * @property {string} avatar The URL to the player's in-game avatar
+     * @property {string} name The player's in-game name
      * @property {?string} title The player's title, if he has one
-     * @property {?string} squadron The player's squadron, if he's in one
+     * @property {?Clan} clan The player's squadron, if he's in one
      * @property {number} level The player's in-game experience level
-     * @property {string} registered The date when the player registered
+     * @property {Date} registered The date when the player registered
+     * @property {boolean} banned If the player's game access has been blocked
      * @property {CountryInfo} usa Statistics for the USA
      * @property {CountryInfo} ussr Statistics for the USSR
      * @property {CountryInfo} britain Statistics for Great Britain
@@ -105,21 +105,19 @@ class HTMLParser {
      * @property {CountryInfo} france Statistics for France
      */
     const profile = {
-      image: document.getElementsByClassName("user-profile__ava-img")[0].src.split("/").slice(3).join("/"),
-      nick: userinfo.children[0].innerHTML.trim(),
-      title: userinfo.children[1].innerHTML.trim(),
-      squadron: userinfo.children[2].children[0] ? userinfo.children[2].children[0].innerHTML.trim() : null,
-      level: !userinfo.children[2].children[0] ? userinfo.children[2].innerHTML
+      name: $(".user-profile__data-nick").text().trim(),
+      title: info.eq(0).text().length ? info.eq(0).text().trim() : null,
+      clan: info.eq(2).length ? { tag: info.eq(1).text().trim(), url: $(".user-profile__data-link").attr("href") } : null,
+      level: info.eq(2).length ? parseInt(info.eq(2).text().trim()
+        .split(" ")[1])
+        : parseInt(info.eq(1).text().trim()
+          .split(" ")[1]),
+      avatar: "http:".concat($(".user-profile__ava-img").attr("src")),
+      registered: $(".user-profile__data-regdate")
+        .text()
         .trim()
-        .split(" ")
-        .slice(1)
-        .join("")
-        : userinfo.children[3].innerHTML.trim().split(" ")
-          .slice(1)
-          .join(""),
-      registered: !userinfo.children[2].children[0]
-        ? userinfo.children[3].innerHTML.trim().split(" ")[2]
-        : userinfo.children[4].innerHTML.trim().split(" ")[2],
+        .replace(/Registration date\s/, ""),
+      banned: Boolean($(".user-profile__data-nick--banned").length),
       /**
        * Represents info about a nation for a player's profile
        * @typedef {Object} CountryInfo
@@ -128,56 +126,58 @@ class HTMLParser {
        * @property {number} medals The amount of medals for the country
        */
       usa: {
-        vehicles: parseInt(vehicles.children[1].innerHTML),
-        elite: parseInt(elite.children[1].innerHTML),
-        medals: parseInt(medals.children[1].innerHTML)
+        vehicles: parseInt(planes.eq(0).text()),
+        elite: parseInt(elite.eq(0).text()),
+        medals: parseInt(medals.eq(0).text())
       },
       ussr: {
-        vehicles: parseInt(vehicles.children[2].innerHTML),
-        elite: parseInt(elite.children[2].innerHTML),
-        medals: parseInt(medals.children[2].innerHTML)
+        vehicles: parseInt(planes.eq(1).text()),
+        elite: parseInt(elite.eq(1).text()),
+        medals: parseInt(medals.eq(1).text())
       },
       britain: {
-        vehicles: parseInt(vehicles.children[3].innerHTML),
-        elite: parseInt(elite.children[3].innerHTML),
-        medals: parseInt(medals.children[3].innerHTML)
+        vehicles: parseInt(planes.eq(2).text()),
+        elite: parseInt(elite.eq(2).text()),
+        medals: parseInt(medals.eq(2).text())
       },
       germany: {
-        vehicles: parseInt(vehicles.children[4].innerHTML),
-        elite: parseInt(elite.children[4].innerHTML),
-        medals: parseInt(medals.children[4].innerHTML)
+        vehicles: parseInt(planes.eq(3).text()),
+        elite: parseInt(elite.eq(3).text()),
+        medals: parseInt(medals.eq(3).text())
       },
       japan: {
-        vehicles: parseInt(vehicles.children[5].innerHTML),
-        elite: parseInt(elite.children[5].innerHTML),
-        medals: parseInt(medals.children[5].innerHTML)
+        vehicles: parseInt(planes.eq(4).text()),
+        elite: parseInt(elite.eq(4).text()),
+        medals: parseInt(medals.eq(4).text())
       },
       italy: {
-        vehicles: parseInt(vehicles.children[6].innerHTML),
-        elite: parseInt(elite.children[6].innerHTML),
-        medals: parseInt(medals.children[6].innerHTML)
+        vehicles: parseInt(planes.eq(5).text()),
+        elite: parseInt(elite.eq(5).text()),
+        medals: parseInt(medals.eq(5).text())
       },
       france: {
-        vehicles: parseInt(vehicles.children[7].innerHTML),
-        elite: parseInt(elite.children[7].innerHTML),
-        medals: parseInt(medals.children[7].innerHTML)
+        vehicles: parseInt(planes.eq(6).text()),
+        elite: parseInt(elite.eq(6).text()),
+        medals: parseInt(medals.eq(6).text())
       }
     };
 
-    const statscard = document.getElementsByClassName("user-profile__stat profile-stat all-stat")[0].children[0];
+    const abdata = $(".profile-stat__list-ab > .profile-stat__list-item");
+    const rbdata = $(".profile-stat__list-rb > .profile-stat__list-item");
+    const sbdata = $(".profile-stat__list-sb > .profile-stat__list-item");
+
     /**
      * Represents player statistics
      * @typedef {Object} ProfileStats
      * @property {string} victories The amount of victories
      * @property {string} completed The amount of completed battles
      * @property {string} ratio The victory/battle ratio
-     * @property {string} sessions The amount of total sessions
      * @property {string} deaths The amount of deaths
-     * @property {string} lions The amount of Silver Lions earnt
+     * @property {string} lionsEarned The amount of Silver Lions earnt
      * @property {string} playTime The time played
-     * @property {string} airTargets The amount of air targets destroyed
-     * @property {string} groundTargets The amount of ground targets destroyed
-     * @property {string} navalTargets The amount of naval targets destroyed
+     * @property {string} airTargetsDestroyed The amount of air targets destroyed
+     * @property {string} groundTargetsDestroyed The amount of ground targets destroyed
+     * @property {string} navalTargetsDestroyed The amount of naval targets destroyed
      */
     const stats = {
       /**
@@ -188,91 +188,127 @@ class HTMLParser {
        * @property {ProfileStats} simulator The info for the Simulator gamemode
        */
       arcade: {
-        victories: !statscard.children[1].children[1].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[1].innerHTML.trim()
-          : statscard.children[1].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[1].children[2].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[2].innerHTML.trim()
-          : statscard.children[1].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[1].children[3].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[3].innerHTML.trim()
-          : statscard.children[1].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[1].children[4].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[4].innerHTML.trim()
-          : statscard.children[1].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[1].children[5].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[5].innerHTML.trim()
-          : statscard.children[1].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[1].children[6].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[6].innerHTML.trim()
-          : statscard.children[1].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[1].children[7].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[7].innerHTML.trim()
-          : statscard.children[1].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[1].children[8].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[8].innerHTML.trim()
-          : statscard.children[1].children[8].children[0].innerHTML.trim(),
-        navalTargets: !statscard.children[1].children[9].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[1].children[9].innerHTML.trim()
-          : statscard.children[1].children[9].children[0].innerHTML.trim()
+        victories: !isNaN(parseInt(abdata.eq(1).text().trim())) ? parseInt(abdata.eq(1).text().trim()) : null,
+        completed: !isNaN(
+          parseInt(abdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(abdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        ratio: abdata.eq(3).text().trim(),
+        deaths: !isNaN(
+          parseInt(abdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(abdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        lionsEarned: !isNaN(
+          parseInt(abdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(abdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        playTime: abdata.eq(6).text().trim(),
+        airTargetsDestroyed: !isNaN(parseInt(abdata.eq(7).text().trim())) ? parseInt(abdata.eq(7).text().trim()) : null,
+        groundTargetsDestroyed: !isNaN(parseInt(abdata.eq(8).text().trim())) ? parseInt(abdata.eq(8).text().trim()) : null,
+        navalTargetsDestroyed: !isNaN(parseInt(abdata.eq(9).text().trim())) ? parseInt(abdata.eq(9).text().trim()) : null
       },
       realistic: {
-        victories: !statscard.children[2].children[1].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[1].innerHTML.trim()
-          : statscard.children[2].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[2].children[2].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[2].innerHTML.trim()
-          : statscard.children[2].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[2].children[3].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[3].innerHTML.trim()
-          : statscard.children[2].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[2].children[4].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[4].innerHTML.trim()
-          : statscard.children[2].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[2].children[5].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[5].innerHTML.trim()
-          : statscard.children[2].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[2].children[6].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[6].innerHTML.trim()
-          : statscard.children[2].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[2].children[7].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[7].innerHTML.trim()
-          : statscard.children[2].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[2].children[8].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[8].innerHTML.trim()
-          : statscard.children[2].children[8].children[0].innerHTML.trim(),
-        navalTargets: !statscard.children[2].children[9].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[2].children[9].innerHTML.trim()
-          : statscard.children[2].children[9].children[0].innerHTML.trim()
+        victories: !isNaN(parseInt(rbdata.eq(1).text().trim())) ? parseInt(rbdata.eq(1).text().trim()) : null,
+        completed: !isNaN(
+          parseInt(rbdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(rbdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        ratio: rbdata.eq(3).text().trim(),
+        deaths: !isNaN(
+          parseInt(rbdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(rbdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        lionsEarned: !isNaN(
+          parseInt(rbdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(rbdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        playTime: rbdata.eq(6).text().trim(),
+        airTargetsDestroyed: !isNaN(parseInt(rbdata.eq(7).text().trim())) ? parseInt(rbdata.eq(7).text().trim()) : null,
+        groundTargetsDestroyed: !isNaN(parseInt(rbdata.eq(8).text().trim())) ? parseInt(rbdata.eq(8).text().trim()) : null,
+        navalTargetsDestroyed: !isNaN(parseInt(rbdata.eq(9).text().trim())) ? parseInt(rbdata.eq(9).text().trim()) : null
       },
       simulator: {
-        victories: !statscard.children[3].children[1].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[1].innerHTML.trim()
-          : statscard.children[3].children[1].children[0].innerHTML.trim(),
-        completed: !statscard.children[3].children[2].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[2].innerHTML.trim()
-          : statscard.children[3].children[2].children[0].innerHTML.trim(),
-        ratio: !statscard.children[3].children[3].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[3].innerHTML.trim()
-          : statscard.children[3].children[3].children[0].innerHTML.trim(),
-        deaths: !statscard.children[3].children[4].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[4].innerHTML.trim()
-          : statscard.children[3].children[4].children[0].innerHTML.trim(),
-        lions: !statscard.children[3].children[5].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[5].innerHTML.trim()
-          : statscard.children[3].children[5].children[0].innerHTML.trim(),
-        playTime: !statscard.children[3].children[6].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[6].innerHTML.trim()
-          : statscard.children[3].children[6].children[0].innerHTML.trim(),
-        airTargets: !statscard.children[3].children[7].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[7].innerHTML.trim()
-          : statscard.children[3].children[7].children[0].innerHTML.trim(),
-        groundTargets: !statscard.children[3].children[8].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[8].innerHTML.trim()
-          : statscard.children[3].children[8].children[0].innerHTML.trim(),
-        navalTargets: !statscard.children[3].children[9].innerHTML.toLowerCase().includes("n/a")
-          ? statscard.children[3].children[9].innerHTML.trim()
-          : statscard.children[3].children[9].children[0].innerHTML.trim()
+        victories: !isNaN(parseInt(sbdata.eq(1).text().trim())) ? parseInt(sbdata.eq(1).text().trim()) : null,
+        completed: !isNaN(
+          parseInt(sbdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(sbdata.eq(2)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        ratio: sbdata.eq(3).text().trim(),
+        deaths: !isNaN(
+          parseInt(sbdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(sbdata.eq(4)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        lionsEarned: !isNaN(
+          parseInt(sbdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          )
+        ) ? parseInt(sbdata.eq(5)
+            .text()
+            .trim()
+            .replace(/,/g, "")
+          ) : null,
+        playTime: sbdata.eq(6).text().trim(),
+        airTargetsDestroyed: !isNaN(parseInt(sbdata.eq(7).text().trim())) ? parseInt(sbdata.eq(7).text().trim()) : null,
+        groundTargetsDestroyed: !isNaN(parseInt(sbdata.eq(8).text().trim())) ? parseInt(sbdata.eq(8).text().trim()) : null,
+        navalTargetsDestroyed: !isNaN(parseInt(sbdata.eq(9).text().trim())) ? parseInt(sbdata.eq(9).text().trim()) : null
       }
     };
 
@@ -282,12 +318,10 @@ class HTMLParser {
      * @property {ProfileInfo} profile The player's profile
      * @property {ProfileStats} stats Game statistics for the player
      */
-    const data = {
+    return {
       profile,
       stats
     };
-
-    return data;
   }
 
   parseClan() {
@@ -355,7 +389,7 @@ class HTMLParser {
       /**
        * Represents info per difficulty for a clan.
        * This is identical to {@link Profile#difficultyInfo}, with the difference being
-       * that {@link Profile#difficultyInfo} is for profile statistics (which are objects),
+       * that Profile#difficultyInfo is for profile statistics (which are objects),
        * and {@link Clan#SquadronDifficultyStats} is for strings.
        * @typedef {Object} SquadronDifficultyStats
        * @property {string} arcade The info for the Arcade gamemode

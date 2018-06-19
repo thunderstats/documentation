@@ -129,7 +129,7 @@ class ThunderAPI {
     }
     const data = await this.rest.request("get", "user", player)
       .catch(error => Promise.reject(error));
-    const profile = new User(data);
+    const profile = new User(data, this);
     this.users.set(player, profile);
     return Promise.resolve(profile);
   }
