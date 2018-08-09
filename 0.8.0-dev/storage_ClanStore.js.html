@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util/Constants.js - Documentation</title>
+    <title>storage/ClanStore.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">util/Constants.js</h1>
+    <h1 class="page-title">storage/ClanStore.js</h1>
     
 
     
@@ -37,36 +37,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
-const browser = exports.browser = typeof window !== "undefined";
-
-exports.UserAgent = browser
-  ? null
-  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) ThunderAPI/${Package.version}`;
+            <pre class="prettyprint source linenums"><code>const DataStore = require("./DataStore");
+const Clan = require("../structures/Clan");
+const { TypeError } = require("../errors");
 
 /**
- * URLs to access specific endpoints. These are:
- * * https://warthunder.com/en
- * * https://warthunder.com/news3-en.html
- * * https://static.warthunder.com
- * * https://wiki.warthunder.com
- * * https://live.warthunder.com/
- * @typedef {string} WTEndPointURL
+ * A data store to store Clan models.
+ * @extends {DataStore}
  */
-exports.URLs = {
-  main: "https://warthunder.com",
-  news: "https://warthunder.com/news3-en.html",
-  static: "https://static.warthunder.com",
-  wiki: "https://wiki.warthunder.com",
-  live: "https://live.warthunder.com/"
-};
+class ClanStore extends DataStore {
+  constructor(thunderAPI, iterable) {
+    super(thunderAPI, iterable, Clan);
+  }
 
-// eslint-disable-next-line no-unused-vars
-function keyMirror(arr) {
-  const tmp = Object.create(null);
-  for (const value of arr) tmp[value] = value;
-  return tmp;
-}</code></pre>
+  /**
+   * Resolves a ClanResolvable to a Clan object.
+   * @param {string} clan The ClanResolvable to identify
+   * @returns {?Clan}
+   */
+  resolve(clan) {
+    return super.resolve(clan);
+  }
+
+  /**
+   * Obtains a Clan from the site, or the Clan cache if it's already available
+   * @param {string} name Name of the clan
+   * @param {boolean} [cache=true] Whether to cache the new Clan object if it isn't already
+   * @returns {Promise&lt;Clan>}
+   */
+  fetch(name, cache = true) {
+    if (typeof name === "undefined") return Promise.reject(new TypeError("INVALID_QUERY", "clan", "string"));
+    const existing = this.get(name);
+    if (existing) return Promise.resolve(existing);
+
+    return this.thunderAPI.rest.request("get", `/en/community/claninfo/${encodeURIComponent(name)}`, "clan").then(data => this.add(data, cache));
+  }
+}
+
+module.exports = ClanStore;</code></pre>
         </article>
     </section>
 

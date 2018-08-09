@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util/Constants.js - Documentation</title>
+    <title>storage/DataStore.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">util/Constants.js</h1>
+    <h1 class="page-title">storage/DataStore.js</h1>
     
 
     
@@ -37,36 +37,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
-const browser = exports.browser = typeof window !== "undefined";
+            <pre class="prettyprint source linenums"><code>const Collection = require("../util/Collection");
 
-exports.UserAgent = browser
-  ? null
-  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) ThunderAPI/${Package.version}`;
+class DataStore extends Collection {
+  constructor(thunderAPI, iterable, holds) {
+    super();
+    Object.defineProperty(this, "thunderAPI", { value: thunderAPI });
+    Object.defineProperty(this, "holds", { value: holds });
+    if (iterable) for (const item of iterable) this.add(item);
+  }
 
-/**
- * URLs to access specific endpoints. These are:
- * * https://warthunder.com/en
- * * https://warthunder.com/news3-en.html
- * * https://static.warthunder.com
- * * https://wiki.warthunder.com
- * * https://live.warthunder.com/
- * @typedef {string} WTEndPointURL
- */
-exports.URLs = {
-  main: "https://warthunder.com",
-  news: "https://warthunder.com/news3-en.html",
-  static: "https://static.warthunder.com",
-  wiki: "https://wiki.warthunder.com",
-  live: "https://live.warthunder.com/"
-};
+  add(data, cache = true, { name, extras = [] } = {}) {
+    const existing = this.get(name || data.name);
+    if (existing) return existing;
 
-// eslint-disable-next-line no-unused-vars
-function keyMirror(arr) {
-  const tmp = Object.create(null);
-  for (const value of arr) tmp[value] = value;
-  return tmp;
-}</code></pre>
+    const entry = this.holds ? new this.holds(this.thunderAPI, data, ...extras) : data; // eslint-disable-line new-cap
+    if (cache) this.set(name || entry.id, entry);
+    return entry;
+  }
+
+  remove(key) { return this.delete(key); }
+
+  /**
+   * Resolves a data entry to a data Object.
+   * @param {string|Object} nameOrInstance The id or instance of something in this DataStore
+   * @returns {?Object} An instance from this DataStore
+   */
+  resolve(nameOrInstance) {
+    if (nameOrInstance instanceof this.holds) return nameOrInstance;
+    if (typeof nameOrInstance === "string") return this.get(nameOrInstance) || null;
+    return null;
+  }
+}
+
+module.exports = DataStore;</code></pre>
         </article>
     </section>
 

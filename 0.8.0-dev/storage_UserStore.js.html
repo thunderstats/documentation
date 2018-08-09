@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util/Constants.js - Documentation</title>
+    <title>storage/UserStore.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">util/Constants.js</h1>
+    <h1 class="page-title">storage/UserStore.js</h1>
     
 
     
@@ -37,36 +37,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
-const browser = exports.browser = typeof window !== "undefined";
-
-exports.UserAgent = browser
-  ? null
-  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) ThunderAPI/${Package.version}`;
+            <pre class="prettyprint source linenums"><code>const DataStore = require("./DataStore");
+const User = require("../structures/User");
+const { TypeError } = require("../errors");
 
 /**
- * URLs to access specific endpoints. These are:
- * * https://warthunder.com/en
- * * https://warthunder.com/news3-en.html
- * * https://static.warthunder.com
- * * https://wiki.warthunder.com
- * * https://live.warthunder.com/
- * @typedef {string} WTEndPointURL
+ * A data store to store User models.
+ * @extends {DataStore}
  */
-exports.URLs = {
-  main: "https://warthunder.com",
-  news: "https://warthunder.com/news3-en.html",
-  static: "https://static.warthunder.com",
-  wiki: "https://wiki.warthunder.com",
-  live: "https://live.warthunder.com/"
-};
+class UserStore extends DataStore {
+  constructor(thunderAPI, iterable) {
+    super(thunderAPI, iterable, User);
+  }
 
-// eslint-disable-next-line no-unused-vars
-function keyMirror(arr) {
-  const tmp = Object.create(null);
-  for (const value of arr) tmp[value] = value;
-  return tmp;
-}</code></pre>
+  /**
+   * Resolves a UserResolvable to a User object.
+   * @param {string} user The UserResolvable to identify
+   * @returns {?User}
+   */
+  resolve(user) {
+    return super.resolve(user);
+  }
+
+  /**
+   * Obtains a user from the site, or the user cache if it's already available
+   * @param {string} name Name of the user
+   * @param {boolean} [cache=true] Whether to cache the new user object if it isn't already
+   * @returns {Promise&lt;User>}
+   */
+  fetch(name, cache = true) {
+    if (typeof name === "undefined") return Promise.reject(new TypeError("INVALID_QUERY", "user", "string"));
+    const existing = this.get(name);
+    if (existing) return Promise.resolve(existing);
+
+    return this.thunderAPI.rest.request("get", "/en/community/userinfo/", "user", { query: { nick: name } }).then(data => this.add(data, cache));
+  }
+}
+
+module.exports = UserStore;</code></pre>
         </article>
     </section>
 

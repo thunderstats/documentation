@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util/Constants.js - Documentation</title>
+    <title>structures/Base.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">util/Constants.js</h1>
+    <h1 class="page-title">structures/Base.js</h1>
     
 
     
@@ -37,36 +37,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Package = require("../../package.json");
-const browser = exports.browser = typeof window !== "undefined";
-
-exports.UserAgent = browser
-  ? null
-  : `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) ThunderAPI/${Package.version}`;
-
-/**
- * URLs to access specific endpoints. These are:
- * * https://warthunder.com/en
- * * https://warthunder.com/news3-en.html
- * * https://static.warthunder.com
- * * https://wiki.warthunder.com
- * * https://live.warthunder.com/
- * @typedef {string} WTEndPointURL
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents a data model that is identifiable by a name
  */
-exports.URLs = {
-  main: "https://warthunder.com",
-  news: "https://warthunder.com/news3-en.html",
-  static: "https://static.warthunder.com",
-  wiki: "https://wiki.warthunder.com",
-  live: "https://live.warthunder.com/"
-};
+class Base {
+  constructor(thunderAPI) {
+    /**
+     * The instance of ThunderAPI that instantiated this
+     * @name Base#thunderAPI
+     * @type {ThunderAPI}
+     * @readonly
+     */
+    Object.defineProperty(this, "thunderAPI", { value: thunderAPI });
+  }
 
-// eslint-disable-next-line no-unused-vars
-function keyMirror(arr) {
-  const tmp = Object.create(null);
-  for (const value of arr) tmp[value] = value;
-  return tmp;
-}</code></pre>
+  _clone() {
+    return Object.assign(Object.create(this), this);
+  }
+
+  _patch(data) { return data; }
+
+  _update(data) {
+    const clone = this._clone();
+    this._patch(data);
+    return clone;
+  }
+
+  valueOf() {
+    return this.id;
+  }
+}
+
+module.exports = Base;</code></pre>
         </article>
     </section>
 

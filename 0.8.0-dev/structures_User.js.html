@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>structures/User.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="Clan.html">Clan</a></li><li><a href="ClanStore.html">ClanStore</a><ul class='methods'><li data-type='method'><a href="ClanStore.html#fetch">fetch</a></li><li data-type='method'><a href="ClanStore.html#resolve">resolve</a></li></ul></li><li><a href="Collection.html">Collection</a><ul class='methods'><li data-type='method'><a href="Collection.html#array">array</a></li><li data-type='method'><a href="Collection.html#clone">clone</a></li><li data-type='method'><a href="Collection.html#concat">concat</a></li><li data-type='method'><a href="Collection.html#deleteAll">deleteAll</a></li><li data-type='method'><a href="Collection.html#equals">equals</a></li><li data-type='method'><a href="Collection.html#every">every</a></li><li data-type='method'><a href="Collection.html#exists">exists</a></li><li data-type='method'><a href="Collection.html#filter">filter</a></li><li data-type='method'><a href="Collection.html#filterArray">filterArray</a></li><li data-type='method'><a href="Collection.html#find">find</a></li><li data-type='method'><a href="Collection.html#findAll">findAll</a></li><li data-type='method'><a href="Collection.html#first">first</a></li><li data-type='method'><a href="Collection.html#firstKey">firstKey</a></li><li data-type='method'><a href="Collection.html#keyArray">keyArray</a></li><li data-type='method'><a href="Collection.html#last">last</a></li><li data-type='method'><a href="Collection.html#lastKey">lastKey</a></li><li data-type='method'><a href="Collection.html#map">map</a></li><li data-type='method'><a href="Collection.html#random">random</a></li><li data-type='method'><a href="Collection.html#randomKey">randomKey</a></li><li data-type='method'><a href="Collection.html#reduce">reduce</a></li><li data-type='method'><a href="Collection.html#some">some</a></li><li data-type='method'><a href="Collection.html#sort">sort</a></li></ul></li><li><a href="HTMLParser.html">HTMLParser</a><ul class='methods'><li data-type='method'><a href="HTMLParser.html#parse">parse</a></li></ul></li><li><a href="ThunderAPI.html">ThunderAPI</a><ul class='methods'><li data-type='method'><a href="ThunderAPI.html#clearInterval">clearInterval</a></li><li data-type='method'><a href="ThunderAPI.html#clearTimeout">clearTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#destroy">destroy</a></li><li data-type='method'><a href="ThunderAPI.html#fetchClan">fetchClan</a></li><li data-type='method'><a href="ThunderAPI.html#fetchUser">fetchUser</a></li><li data-type='method'><a href="ThunderAPI.html#getNews">getNews</a></li><li data-type='method'><a href="ThunderAPI.html#isPlayer">isPlayer</a></li><li data-type='method'><a href="ThunderAPI.html#searchWiki">searchWiki</a></li><li data-type='method'><a href="ThunderAPI.html#setInterval">setInterval</a></li><li data-type='method'><a href="ThunderAPI.html#setTimeout">setTimeout</a></li><li data-type='method'><a href="ThunderAPI.html#sweepCache">sweepCache</a></li></ul></li><li><a href="User.html">User</a></li><li><a href="UserStore.html">UserStore</a><ul class='methods'><li data-type='method'><a href="UserStore.html#fetch">fetch</a></li><li data-type='method'><a href="UserStore.html#resolve">resolve</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-Collection.html">Collection</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">structures/User.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Base = require("./Base");
+const Collection = require("../util/Collection");
+
+/**
+ * Represents a player on War Thunder
+ */
+class User extends Base {
+  constructor(thunderAPI, data) {
+    super(thunderAPI);
+
+    /**
+     * The in-game nickname of the player
+     * @type {string}
+     * @readonly
+     */
+    this.name = data.profile.name;
+
+    /**
+     * The registration date of the player
+     * @type {string}
+     * @readonly
+     */
+    this.registered = data.profile.registered;
+
+    this._patch(data);
+  }
+
+  _patch(data) {
+    const { profile, stats } = data;
+
+    /**
+     * The user's title, if he has set any
+     * @type {?string}
+     * @name User#title
+     */
+    if (profile.title) this.title = profile.title;
+
+    /**
+     * The user's level
+     * @type {number}
+     * @name User#level
+     */
+    this.level = profile.level;
+
+    /**
+     * The URL to the user's in-game avatar
+     * @type {string}
+     * @name User#avatar
+     */
+    this.avatar = profile.avatar;
+
+    /**
+     * If the user's game access is blocked
+     * @type {boolean}
+     * @name User#banned
+     */
+    this.banned = profile.banned;
+
+    if (profile.clan) {
+      const name = decodeURIComponent(profile.clan.url.split("/").slice(-1));
+      this._clan = `${name} (${profile.clan.tag})`;
+      this.thunderAPI.clans.fetch(name)
+        .then(clan => {
+          /**
+           * The user's squadron, if he is in any
+           * @type {?Clan}
+           * @name User#clan
+           */
+          this.clan = clan;
+        })
+        .catch(() => {}); // eslint-disable-line no-empty-function
+    }
+
+    /**
+     * Represents per-country vehicle statistics
+     * @typedef {Object} VehicleStats
+     * @property {number} vehicles The total amount of vehicles unlocked for this country
+     * @property {number} elite The total amount of elite vehicles unlocked (all modifications unlocked) for this country
+     * @property {number} medals The total amount of medals for this country
+     */
+    /**
+     * The player's vehicle statistics, mapped by country.
+     * The countries are:
+     * * usa
+     * * ussr
+     * * britain
+     * * germany
+     * * japan
+     * * italy
+     * * france
+     * @type {Collection&lt;string,VehicleStats>}
+     * @name User#vehicles
+     */
+    this.vehicles = new Collection();
+    this.vehicles.set("usa", profile.usa);
+    this.vehicles.set("ussr", profile.ussr);
+    this.vehicles.set("britain", profile.britain);
+    this.vehicles.set("germany", profile.germany);
+    this.vehicles.set("japan", profile.japan);
+    this.vehicles.set("italy", profile.italy);
+    this.vehicles.set("france", profile.france);
+
+    /**
+     * The player's statistics, mapped by gamemode.
+     * The gamemodes are:
+     * * arcade
+     * * realistic
+     * * simulator
+     * @type {Collection&lt;string,GameModeStats>}
+     */
+    this.stats = new Collection(Object.entries(stats));
+  }
+}
+
+module.exports = User;
+
+/**
+ * Represents user statistics per gamemode
+ * @typedef {Object} GameModeStats
+ * @property {?number} victories The amount of victories
+ * @property {?number} completed The amount of completed matches
+ * @property {string} ratio The battle/victory ratio
+ * @property {?number} deaths The total amount of deaths
+ * @property {?number} lionsEarned The total amount of Silver Lions earnt
+ * @property {string} playTime The total amount of time played in this mode
+ * @property {?number} airTargetsDestroyed The total amount of air targets destroyed
+ * @property {?number} groundTargetsDestroyed The total amount of ground targets destroyed
+ * @property {?number} navalTargetsDestroyed The total amount of naval targets destroyed
+ * @property {BattleStats} aviation Battle statistics for air battles
+ * @property {BattleStats} ground Battle statistics for ground forces
+ * @property {BattleStats} fleet Battle statistics for naval battles
+ */
+/**
+ * Represents battle statistics per type of battle
+ * @typedef {Object} BattleStats
+ * @property {Battles} battles The total amount of battles in the mode, per vehicle class
+ * @property {Playtime} playTime The total amount of playtime in the mode, per vehicle class
+ * @property {TargetsDestroyed} targetsDestroyed The total amount of targets destroyed in the mode, per vehicle class
+ */
+/**
+ * Represents the amount of battles in a mode, per vehicle class
+ * @typedef {Object} Battles
+ * @property {?number} total The total amount of battles played
+ * @property {?number} fighter The total amount of battles played in a fighter (only applicable for aviation)
+ * @property {?number} bomber The total amount of battles played in a bomber (only applicable for aviation)
+ * @property {?number} attacker The total amount of battles played in an attacker (only applicable for aviation)
+ * @property {?number} tank The total amount of battles played in a tank (only applicable for ground)
+ * @property {?number} spg The total amount of battles played in a spg (only applicable for ground)
+ * @property {?number} heavy The total amount of battles played in a heavy tank (only applicable for ground)
+ * @property {?number} spaa The total amount of battles played in an SPAA (only applicable for ground)
+ * @property {?number} ship The total amount of battles played in a ship (only applicable for fleet)
+ * @property {?number} torpedoBoat The total amount of battles played in a torpedoboat (only applicable for fleet)
+ * @property {?number} gunBoat The total amount of battles played in a gunboat (only applicable for fleet)
+ * @property {?number} torpedoGunBoat The total amount of battles played in a torpedo gunboat (only applicable for fleet)
+ * @property {?number} subChaser The total amount of battles played in a sub-chaser (only applicable for fleet)
+ * @property {?number} destroyer The total amount of battles played in a destroyer (only applicable for fleet)
+ * @property {?number} ferryBarge The total amount of battles played in a ferry barge (only applicable for fleet)
+ */
+/**
+ * Represents the total amount of targets destroyed in a mode, per vehicle type
+ * @typedef {Object} TargetsDestroyed
+ * @property {?number} total The total amount of targets destroyed in a mode
+ * @property {?number} air The total amount of air targets destroyed in a mode
+ * @property {?number} ground The total amount of ground targets destroyed in a mode
+ * @property {?number} naval The total amount of naval targets destroyed in a mode
+ */</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
