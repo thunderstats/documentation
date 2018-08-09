@@ -97,11 +97,16 @@ class User extends Base {
 
     if (profile.clan) {
       const name = decodeURIComponent(profile.clan.url.split("/").slice(-1));
-      this._clan = `${name} (${profile.clan.tag})`;
+      this.clan = { name, tag: profile.clan.tag };
       this.thunderAPI.clans.fetch(name)
         .then(clan => {
           /**
-           * The user's squadron, if he is in any
+           * The user's squadron, if he is in any. Note, that
+           * when the user is fetched for the first time, the
+           * clan object will be an object with a name and tag
+           * property. The full clan object will be available
+           * when getting it from the userstore when the promise
+           * has been resolved.
            * @type {?Clan}
            * @name User#clan
            */
